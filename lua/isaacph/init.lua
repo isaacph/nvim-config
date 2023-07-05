@@ -1,3 +1,5 @@
 require("isaacph.packer")
-require("isaacph.remap")
-require("isaacph.set")
+if !os.getenv("INITNVIM") then
+    require("isaacph.remap")
+    require("isaacph.set")
+end

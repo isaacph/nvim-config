@@ -66,4 +66,8 @@ return require('packer').startup(function(use)
   }
 
   use { 'rush-rs/tree-sitter-asm' } -- for assemmbly tree sitter highlighting
+
+  if os.getenv("INITNVIM") then
+    require("packer").sync()
+  end
 end)
