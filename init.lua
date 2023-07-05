@@ -1,2 +1,2 @@
 print("Testing print debugging")
-require("isaacph")
+-- require("isaacph")
