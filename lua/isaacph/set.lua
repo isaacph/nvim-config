@@ -16,7 +16,11 @@ vim.opt.wrap = false
 
 vim.opt.swapfile = false
 vim.opt.backup = false
-vim.opt.undodir = "C:\\Users\\Isaac\\.vim\\undodir"
+if vim.fn.has('linux') then
+    vim.opt.undodir = "~/.vim/undodir"
+else
+    vim.opt.undodir = "C:\\Users\\Isaac\\.vim\\undodir"
+end
 vim.opt.undofile = true
 
 vim.opt.hlsearch = false
