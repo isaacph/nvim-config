@@ -67,6 +67,15 @@ return require('packer').startup(function(use)
 
   use { 'rush-rs/tree-sitter-asm' } -- for assemmbly tree sitter highlighting
 
+  use { 'vim-skk/eskk.vim' }
+
+  use {
+      'nvim-tree/nvim-tree.lua',
+      requires = {
+          'nvim-tree/nvim-web-devicons', -- optional
+      },
+  }
+
   if os.getenv("INITNVIM") then
     require("packer").sync()
   end
