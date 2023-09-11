@@ -7,6 +7,7 @@ lsp.ensure_installed({
     'tsserver',
     'cssls',
     'html',
+    'jsonls',
 })
 
 local cmp = require('cmp')
