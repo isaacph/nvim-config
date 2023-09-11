@@ -2,7 +2,7 @@
 vim.g.mapleader = " "
 
 -- open parent folder in netrw
-vim.keymap.set("n", "<leader>pv", vim.cmd.Explore)
+-- vim.keymap.set("n", "<leader>pv", vim.cmd.Explore)
 vim.keymap.set("n", "<leader>u", ":UndotreeToggle<CR>")
 
 -- fancy move lines in visual mode
