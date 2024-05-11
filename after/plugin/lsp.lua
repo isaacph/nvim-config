@@ -116,6 +116,9 @@ lspconfig.lua_ls.setup {
 
 lspconfig.clangd.setup {
     capabilities = cmp_capabilities,
+    filetypes = {
+        "c", "cpp", "objc", "objcpp", "cuda"-- , "proto"
+    },
 }
 lspconfig.zls.setup {
     capabilities = cmp_capabilities,

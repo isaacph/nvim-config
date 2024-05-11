@@ -20,6 +20,7 @@ require("lazy").setup({
         dependencies = { 'nvim-lua/plenary.nvim' }
     },
     'EdenEast/nightfox.nvim',
+    -- "folke/tokyonight.nvim",
     { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate'},
     'nvim-treesitter/playground',
     'theprimeagen/harpoon',
@@ -45,5 +46,8 @@ require("lazy").setup({
     'hrsh7th/vim-vsnip',
 
     -- java
-    -- 'mfussenegger/nvim-jdtls',
+    'mfussenegger/nvim-jdtls',
+
+    -- protobuf
+    'dense-analysis/ale',
 })
