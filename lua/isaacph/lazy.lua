@@ -40,4 +40,6 @@ require('lazy').setup({
 
     -- java
     'mfussenegger/nvim-jdtls',
+
+    'dense-analysis/ale',
 })

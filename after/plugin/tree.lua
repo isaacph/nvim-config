@@ -14,7 +14,7 @@ local api = require("nvim-tree.api")
 require("nvim-tree").setup({
     sort_by = "case_sensitive",
     view = {
-        width = 30,
+        width = 36,
     },
     renderer = {
         group_empty = true,
@@ -69,6 +69,8 @@ require("nvim-tree").setup({
         vim.keymap.set('n', '^',       api.node.navigate.parent,            opts('Parent Directory'))
         vim.keymap.set('n', '<Space>j',       api.node.navigate.sibling.next,      opts('Next Sibling'))
         vim.keymap.set('n', '<Space>k',       api.node.navigate.sibling.prev,      opts('Previous Sibling'))
+        vim.keymap.set('n', 'gj',       api.node.navigate.sibling.next,      opts('Next Sibling'))
+        vim.keymap.set('n', 'gk',       api.node.navigate.sibling.prev,      opts('Previous Sibling'))
         vim.keymap.set('n', 'L',       api.node.navigate.sibling.last,      opts('Last Sibling'))
         vim.keymap.set('n', 'H',       api.node.navigate.sibling.first,     opts('First Sibling'))
         vim.keymap.set('n', '<C-/>',       api.tree.search_node,                opts('Search'))
