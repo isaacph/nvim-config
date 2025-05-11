@@ -46,6 +46,6 @@ parser_config.glsl_custom = {
     },
     filetype = "glsl_custom",
 }
-vim.treesitter.language.register('glsl_custom', 'glsl')
+vim.treesitter.language.register('glsl_custom', 'comp')
 vim.treesitter.language.register('glsl_custom', 'vert')
 vim.treesitter.language.register('glsl_custom', 'frag')

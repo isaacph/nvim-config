@@ -52,6 +52,10 @@ local config = {
         bundles = {}
     },
 }
+config.on_attach = (function(client, bufnr)
+    print("on attach?")
+    Global_set_bindings(client, bufnr)
+end)
 require('jdtls').start_or_attach(config)
 
-set_bindings(0)
+-- set_bindings(0)

@@ -27,7 +27,6 @@ require("nvim-tree").setup({
     },
     on_attach = function(bufnr)
         local opts = function (desc)
-            local x = event
             return {
                 desc = 'nvim-tree: ' .. desc,
                 buffer = bufnr,
@@ -43,10 +42,11 @@ require("nvim-tree").setup({
         vim.keymap.set('n', 'ce',       api.fs.rename,                       opts('Rename'))
         vim.keymap.set('n', 'cc',       api.fs.rename_full,                  opts('Rename: Full Path'))
 
-        vim.keymap.set('n', 'bd',      api.marks.bulk.delete,               opts('Delete Bookmarked'))
-        vim.keymap.set('n', 'bt',      api.marks.bulk.trash,                opts('Trash Bookmarked'))
-        vim.keymap.set('n', 'bv',     api.marks.bulk.move,                 opts('Move Bookmarked'))
+        vim.keymap.set('n', '<Leader>d',      api.marks.bulk.delete,               opts('Delete Bookmarked'))
+        vim.keymap.set('n', '<Leader>x',      api.marks.bulk.trash,                opts('Trash Bookmarked'))
+        vim.keymap.set('n', '<Leader>pp',     api.marks.bulk.move,                 opts('Move Bookmarked'))
         vim.keymap.set('n', 'V',       api.marks.toggle,                    opts('Toggle Bookmark'))
+        vim.keymap.set('n', '<Leader>V',       api.marks.toggle,                    opts('Toggle Bookmark'))
 
         vim.keymap.set('n', 'ye',       api.fs.copy.filename,                opts('Copy Name'))
         vim.keymap.set('n', 'y$',      api.fs.copy.absolute_path,           opts('Copy Absolute Path'))
@@ -64,11 +64,13 @@ require("nvim-tree").setup({
 
         vim.keymap.set('n', '}',   api.tree.change_root_to_node,        opts('CD'))
         vim.keymap.set('n', '{',       api.tree.change_root_to_parent,      opts('Up'))
-        vim.keymap.set('n', '<C-j>',    api.node.navigate.parent_close,      opts('Close Directory'))
+        -- vim.keymap.set('n', '<C-j>',    api.node.navigate.parent_close,      opts('Close Directory'))
         vim.keymap.set('n', '0',       api.node.navigate.parent,            opts('Parent Directory'))
         vim.keymap.set('n', '^',       api.node.navigate.parent,            opts('Parent Directory'))
         vim.keymap.set('n', '<Space>j',       api.node.navigate.sibling.next,      opts('Next Sibling'))
+        vim.keymap.set('n', '<C-j>',       api.node.navigate.sibling.next,      opts('Next Sibling'))
         vim.keymap.set('n', '<Space>k',       api.node.navigate.sibling.prev,      opts('Previous Sibling'))
+        vim.keymap.set('n', '<C-k>',       api.node.navigate.sibling.prev,      opts('Previous Sibling'))
         vim.keymap.set('n', 'gj',       api.node.navigate.sibling.next,      opts('Next Sibling'))
         vim.keymap.set('n', 'gk',       api.node.navigate.sibling.prev,      opts('Previous Sibling'))
         vim.keymap.set('n', 'L',       api.node.navigate.sibling.last,      opts('Last Sibling'))
@@ -107,10 +109,18 @@ require("nvim-tree").setup({
         vim.keymap.set('n', '<C-e>',   api.node.open.replace_tree_buffer,   opts('Open: In Place'))
         vim.keymap.set('n', '<C-t>',   api.node.open.tab,                   opts('Open: New Tab'))
         vim.keymap.set('n', '<C-v>',   api.node.open.vertical,              opts('Open: Vertical Split'))
-        vim.keymap.set('n', '<C-x>',   api.node.open.horizontal,            opts('Open: Horizontal Split'))
+        -- vim.keymap.set('n', '<C-x>',   api.node.open.horizontal,            opts('Open: Horizontal Split'))
         vim.keymap.set('n', '<Tab>',   api.node.open.preview,               opts('Open Preview'))
         vim.keymap.set('n', ']e',      api.node.navigate.diagnostics.next,  opts('Next Diagnostic'))
         vim.keymap.set('n', '[e',      api.node.navigate.diagnostics.prev,  opts('Prev Diagnostic'))
+
+
+        vim.keymap.set("n", "<leader>d", function()
+            return require("nvim-tree.api").tree.toggle({
+                focus = true,
+                find_file = true
+            })
+        end, opts('Open explorer'))
     end
 })
 
@@ -121,4 +131,3 @@ vim.keymap.set("n", "<leader>d", function()
         find_file = true
     })
 end, { silent = true })
-
