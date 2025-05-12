@@ -17,49 +17,53 @@
 --     },
 -- }
 -- local capabilities = require('cmp_nvim_lsp').default_capabilities()
-local capabilities = {}
+-- local capabilities = {}
 
 function Global_set_bindings(client, bufnr)
-    local opts = {buffer = bufnr, remap = false}
+    local opts = { buffer = bufnr, remap = false }
 
     vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
-	vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
-	vim.keymap.set("n", "<leader>vws", function() vim.lsp.workspace_symbol() end, opts)
-	vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end, opts)
-	vim.keymap.set("n", "]d", function() vim.diagnostic.goto_next() end, opts)
-	vim.keymap.set("n", "[d", function() vim.diagnostic.goto_prev() end, opts)
-	vim.keymap.set("n", "<leader>vca", function() vim.lsp.buf.code_action() end, opts)
-	vim.keymap.set("n", "<leader>vrr", function() vim.lsp.buf.references() end, opts)
-	vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
-	vim.keymap.set("n", "<leader>h", function() vim.lsp.buf.signature_help() end, opts)
+    vim.keymap.set("n", "K", function()
+        vim.lsp.buf.hover({
+            border = "rounded",
+        })
+    end, opts)
+    vim.keymap.set("n", "<leader>vws", function() vim.lsp.workspace_symbol() end, opts)
+    vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end, opts)
+    vim.keymap.set("n", "]d", function() vim.diagnostic.goto_next() end, opts)
+    vim.keymap.set("n", "[d", function() vim.diagnostic.goto_prev() end, opts)
+    vim.keymap.set("n", "<leader>vca", function() vim.lsp.buf.code_action() end, opts)
+    vim.keymap.set("n", "<leader>vrr", function() vim.lsp.buf.references() end, opts)
+    vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
+    vim.keymap.set("n", "<leader>h", function() vim.lsp.buf.signature_help() end, opts)
 end
 
 print("init?")
-local lsp = require('lspconfig')
-lsp.on_attach = (function(client, bufnr)
-    print("on attach?")
-    Global_set_bindings(client, bufnr)
-end)
-lsp.clangd.setup {
-    capabilities = capabilities,
+-- local lsp = require('lspconfig')
+-- lsp.on_attach = (function(client, bufnr)
+--     print("on attach?")
+--     Global_set_bindings(client, bufnr)
+-- end)
+-- lsp.clangd.setup {
+--     capabilities = capabilities,
+--     on_attach = Global_set_bindings,
+-- }
+vim.lsp.enable('rust_analyzer')
+vim.lsp.config('rust_analyzer', {
     on_attach = Global_set_bindings,
-}
-lsp.rust_analyzer.setup {
-    capabilities = capabilities,
-    on_attach = Global_set_bindings,
-    root_dir = (function(fname)
-      local root_files = {
-          'Cargo.toml'
-      }
-      local util = require 'lspconfig.util'
-      local x = util.root_pattern(unpack(root_files))(fname)
-        or vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
-      x = x:gsub("/", "\\")
-      print('root:', x)
-      return x
-    end)
-}
-lsp.lua_ls.setup {
+    -- root_dir = (function(fname)
+    --   local root_files = {
+    --       'Cargo.toml'
+    --   }
+    --   local util = require 'lspconfig.util'
+    --   local x = util.root_pattern(unpack(root_files))(fname)
+    --     or vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
+    --   x = x:gsub("/", "\\")
+    --   print('root:', x)
+    --   return x
+    -- end)
+})
+vim.lsp.config('lua_ls', {
     on_init = function(client)
         local path = client.workspace_folders[1].name
         -- print("path is "..path..'/.luarc.json')
@@ -102,36 +106,37 @@ lsp.lua_ls.setup {
         Lua = {}
     },
     on_attach = Global_set_bindings
-}
-local util = require('lspconfig').util
-lsp.pylyzer.setup {
-root_dir = function(fname)
-  local root_files = {
-    'setup.py',
-    'tox.ini',
-    'requirements.txt',
-    'Pipfile',
-    'pyproject.toml',
-  }
-  local x = util.root_pattern(unpack(root_files))(fname)
-    or vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
-  x = x:gsub("\\", "/")
-  print(x)
-  return '/'
-end,
-  cmd = { 'pylyzer', '--server' },
-  filetypes = { 'python' },
-  single_file_support = false,
-  settings = {
-    python = {
-      diagnostics = true,
-      inlayHints = true,
-      smartCompletion = true,
-      checkOnType = false,
-    },
-  },
-}
+})
+-- local util = require('lspconfig').util
+-- lsp.pylyzer.setup {
+-- root_dir = function(fname)
+--   local root_files = {
+--     'setup.py',
+--     'tox.ini',
+--     'requirements.txt',
+--     'Pipfile',
+--     'pyproject.toml',
+--   }
+--   local x = util.root_pattern(unpack(root_files))(fname)
+--     or vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
+--   x = x:gsub("\\", "/")
+--   print(x)
+--   return '/'
+-- end,
+--   cmd = { 'pylyzer', '--server' },
+--   filetypes = { 'python' },
+--   single_file_support = false,
+--   settings = {
+--     python = {
+--       diagnostics = true,
+--       inlayHints = true,
+--       smartCompletion = true,
+--       checkOnType = false,
+--     },
+--   },
+-- }
 vim.keymap.set('n', '<space>vd', vim.diagnostic.open_float)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
 vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
+vim.diagnostic.config({ virtual_text = { current_line = true } })
