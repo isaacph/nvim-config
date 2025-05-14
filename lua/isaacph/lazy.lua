@@ -19,6 +19,7 @@ require('lazy').setup({
         dependencies = 'rktjmp/lush.nvim',
     },
     'nvim-treesitter/nvim-treesitter',
+    'nvim-treesitter/playground',
     'ThePrimeagen/harpoon',
     'mbbill/undotree',
     'neovim/nvim-lspconfig',

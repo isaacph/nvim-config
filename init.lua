@@ -1,1 +1,71 @@
-require("isaacph")
+require 'isaacph'
+
+-- local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+-- if not vim.loop.fs_stat(lazypath) then
+--     vim.fn.system({
+--         "git", "clone", "--filter=blob:none",
+--         "https://github.com/folke/lazy.nvim.git",
+--         "--branch=stable", -- latest stable release
+--         lazypath,
+--     })
+-- end
+-- vim.opt.rtp:prepend(lazypath)
+-- 
+-- require('lazy').setup({
+--     {
+--         'ntk148v/habamax.nvim',
+--         dependencies = 'rktjmp/lush.nvim',
+--     },
+--     'neovim/nvim-lspconfig',
+--     'nvim-treesitter/nvim-treesitter',
+--     'nvim-treesitter/playground',
+-- })
+-- 
+-- function Global_set_bindings(client, bufnr)
+--     local opts = { buffer = bufnr, remap = false }
+-- 
+--     vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
+--     vim.keymap.set("n", "K", function()
+--         vim.lsp.buf.hover({
+--             border = "rounded",
+--         })
+--     end, opts)
+--     vim.keymap.set("n", "<leader>vws", function() vim.lsp.workspace_symbol() end, opts)
+--     vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end, opts)
+--     vim.keymap.set("n", "]d", function() vim.diagnostic.goto_next() end, opts)
+--     vim.keymap.set("n", "[d", function() vim.diagnostic.goto_prev() end, opts)
+--     vim.keymap.set("n", "<leader>vca", function() vim.lsp.buf.code_action() end, opts)
+--     vim.keymap.set("n", "<leader>vrr", function() vim.lsp.buf.references() end, opts)
+--     vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
+--     vim.keymap.set("n", "<leader>h", function() vim.lsp.buf.signature_help() end, opts)
+-- end
+-- 
+-- vim.lsp.enable('rust_analyzer')
+-- vim.lsp.config('rust_analyzer', {
+--     on_attach = Global_set_bindings,
+-- })
+-- 
+-- color = color or "habamax"
+-- vim.cmd.colorscheme(color)
+-- 
+-- require 'nvim-treesitter.configs'.setup {
+--     highlight = { enable = true },
+--     playground = {
+--         enable = true,
+--         disable = {},
+--         updatetime = 25,
+--         persist_queries = false,
+--         keybindings = {
+--             toggle_query_editor = 'o',
+--             toggle_hl_groups = 'i',
+--             toggle_injected_languages = 't',
+--             toggle_anonymous_nodes = 'a',
+--             toggle_language_display = 'I',
+--             focus_language = 'f',
+--             unfocus_language = 'F',
+--             update = 'R',
+--             goto_node = '<cr>',
+--             show_help = '?',
+--         },
+--     }
+-- }
