@@ -79,10 +79,10 @@ cmp.setup({
 
 local cmp_capabilities = require('cmp_nvim_lsp').default_capabilities()
 cmp_capabilities.textDocument.completion.completionItem.snippetSupport = false
-local lspconfig = require('lspconfig')
 
 -- default lua ls config
-lspconfig.lua_ls.setup {
+vim.lsp.enable('lua_ls')
+vim.lsp.config('lua_ls', {
     on_init = function(client)
         local path = client.workspace_folders[1].name
         if not vim.loop.fs_stat(path..'/.luarc.json') and not vim.loop.fs_stat(path..'/.luarc.jsonc') then
@@ -107,25 +107,33 @@ lspconfig.lua_ls.setup {
                 }
             })
 
-            client.notify("workspace/didChangeConfiguration", { settings = client.config.settings })
+            client:notify("workspace/didChangeConfiguration", { settings = client.config.settings })
         end
         return true
     end,
     capabilites = cmp_capabilities,
-}
+})
 
-lspconfig.clangd.setup {
+vim.lsp.enable('clangd')
+vim.lsp.config('clangd', {
     capabilities = cmp_capabilities,
     filetypes = {
         "c", "cpp", "objc", "objcpp", "cuda"-- , "proto"
     },
-}
-lspconfig.zls.setup {
+})
+vim.lsp.enable('zls')
+vim.lsp.config('zls', {
     capabilities = cmp_capabilities,
-}
-lspconfig.rust_analyzer.setup {
+})
+vim.lsp.enable('rust_analyzer')
+vim.lsp.config('rust_analyzer', {
     capabilities = cmp_capabilities,
-}
+})
+vim.lsp.enable('hls')
+vim.lsp.config('hls', {
+    capabilities = cmp_capabilities,
+    cmd = { 'haskell-language-server-9.12.2', '--lsp', },
+})
 
 local lsp_attach = function(event)
     local opts = {buffer = event.buf, remap = false}
@@ -139,6 +147,8 @@ local lsp_attach = function(event)
     vim.keymap.set("n", "<leader>vrr", function() vim.lsp.buf.references() end, opts)
     vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
     -- vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
+
+    vim.highlight.priorities.semantic_tokens = 95
 end
 vim.api.nvim_create_autocmd('LspAttach', {
     group = vim.api.nvim_create_augroup('UserLspConfig', {}),

@@ -16,13 +16,13 @@ require("lazy").setup({
     { "folke/neoconf.nvim", cmd = "Neoconf" },
     "folke/neodev.nvim",
     {
-        'nvim-telescope/telescope.nvim', tag = '0.1.5',
+        'nvim-telescope/telescope.nvim',
         dependencies = { 'nvim-lua/plenary.nvim' }
     },
     'EdenEast/nightfox.nvim',
     -- "folke/tokyonight.nvim",
-    { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate'},
-    'nvim-treesitter/playground',
+    -- { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate', branch = 'main', lazy = false },
+    -- 'nvim-treesitter/playground',
     'theprimeagen/harpoon',
     'mbbill/undotree',
     'neovim/nvim-lspconfig',
@@ -50,4 +50,7 @@ require("lazy").setup({
 
     -- protobuf
     'dense-analysis/ale',
+
+    -- debugging (java)
+    'mfussenegger/nvim-dap',
 })

@@ -47,3 +47,18 @@ vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 -- we don't need find/replace with our lsp rename function
 
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
+
+-- vim.keymap.set("i", "<C-x><C-x>f", function()
+--     local file = vim.api.nvim_eval("@%")
+--     -- from last / to last .
+--     for c in file:
+--         if c == '/':
+--             print('hi')
+--     end
+-- end)
+
+-- Pressing ; will now act like : (enter command mode)
+vim.keymap.set({'n', 'v'}, ';', ':')
+
+-- Pressing : will now act like ; (repeat last f, F, t, or T movement)
+vim.keymap.set({'n', 'v'}, ':', ';')
