@@ -11,19 +11,35 @@ vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
     {
+        'folke/lazy.nvim',
+        opts = {
+            ui = {
+                border = 'rounded',
+            }
+        }
+    },
+    {
         'nvim-telescope/telescope.nvim',
         dependencies = 'nvim-lua/plenary.nvim',
     },
-    {
-        'ntk148v/habamax.nvim',
-        dependencies = 'rktjmp/lush.nvim',
-    },
-    'nvim-treesitter/nvim-treesitter',
-    'nvim-treesitter/playground',
+    { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
     'ThePrimeagen/harpoon',
     'mbbill/undotree',
-    'neovim/nvim-lspconfig',
-    'nvim-tree/nvim-tree.lua',
+    -- 'nvim-tree/nvim-tree.lua', -- stopped working on windows
+    {
+        "nvim-neo-tree/neo-tree.nvim",
+        branch = "v3.x",
+        dependencies = {
+          "nvim-lua/plenary.nvim",
+          "MunifTanjim/nui.nvim",
+          "nvim-tree/nvim-web-devicons", -- optional, but recommended
+        },
+        lazy = false, -- neo-tree will lazily load itself
+    },
+    {
+        "romus204/tree-sitter-manager.nvim",
+        branch = "develop",
+    },
 
     -- -- until they fix https://github.com/neovim/neovim/issues/25177
     -- 'hrsh7th/nvim-cmp',
@@ -40,7 +56,7 @@ require('lazy').setup({
 --     'L3MON4D3/LuaSnip',
 
     -- java
-    'mfussenegger/nvim-jdtls',
+    -- 'mfussenegger/nvim-jdtls',
 
     -- 'dense-analysis/ale',
 })

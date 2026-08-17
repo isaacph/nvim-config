@@ -13,8 +13,10 @@ vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("n", "J", "mzJ`z")
 
 -- keep C-d and C-u to have cursor in the middle
-vim.keymap.set("n", "<C-d>", "<C-d>zz")
-vim.keymap.set("n", "<C-u>", "<C-u>zz")
+-- vim.keymap.set("n", "<C-d>", "<C-d>zz")
+-- vim.keymap.set("n", "<C-u>", "<C-u>zz")
+vim.keymap.set('n', ',', '<C-d>zz')
+vim.keymap.set('n', '\\', '<C-u>zz')
 
 -- keep cursor in the middle for search
 vim.keymap.set("n", "n", "nzzzv")
@@ -50,4 +52,25 @@ vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 -- vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
 vim.keymap.set("n", "z0", "z99999999h")
+
+vim.keymap.set({ "n", "x", "o" }, ";", ":")  -- ; → :
+vim.keymap.set({ "n", "x", "o" }, ":", ";")  -- : → ;
+
+-- Normal mode mapping
+vim.keymap.set("n", "<leader>hg", function()
+    print(vim.fn.synIDattr(vim.fn.synID(vim.fn.line("."), vim.fn.col("."), 1), "name"))
+end)
+
+-- Visual mode mapping
+vim.keymap.set("v", "<leader>hg", function()
+    print(vim.fn.synIDattr(vim.fn.synID(vim.fn.line("."), vim.fn.col("."), 1), "name"))
+end)
+
+vim.keymap.set('n', '<leader>ww', '<C-w><C-w>')
+vim.keymap.set('n', '<leader>wh', '<C-w>h')
+vim.keymap.set('n', '<leader>wl', '<C-w>l')
+vim.keymap.set('n', '<leader>wj', '<C-w>j')
+vim.keymap.set('n', '<leader>wk', '<C-w>k')
+vim.keymap.set('n', '<leader>wt', '<C-w>T')
+vim.keymap.set('n', '<leader>wT', '<C-w>T')
 

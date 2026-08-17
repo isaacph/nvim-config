@@ -38,7 +38,7 @@ function Global_set_bindings(client, bufnr)
     vim.keymap.set("n", "<leader>h", function() vim.lsp.buf.signature_help() end, opts)
 end
 
-print("init?")
+-- print("init?")
 -- local lsp = require('lspconfig')
 -- lsp.on_attach = (function(client, bufnr)
 --     print("on attach?")
@@ -48,24 +48,25 @@ print("init?")
 --     capabilities = capabilities,
 --     on_attach = Global_set_bindings,
 -- }
-vim.lsp.enable('rust_analyzer')
-vim.lsp.config('rust_analyzer', {
-    on_attach = Global_set_bindings,
-    -- root_dir = (function(fname)
-    --   local root_files = {
-    --       'Cargo.toml'
-    --   }
-    --   local util = require 'lspconfig.util'
-    --   local x = util.root_pattern(unpack(root_files))(fname)
-    --     or vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
-    --   x = x:gsub("/", "\\")
-    --   print('root:', x)
-    --   return x
-    -- end)
-})
+-- vim.lsp.enable('rust_analyzer')
+-- vim.lsp.config('rust_analyzer', {
+--     on_attach = Global_set_bindings,
+--     -- root_dir = (function(fname)
+--     --   local root_files = {
+--     --       'Cargo.toml'
+--     --   }
+--     --   local util = require 'lspconfig.util'
+--     --   local x = util.root_pattern(unpack(root_files))(fname)
+--     --     or vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
+--     --   x = x:gsub("/", "\\")
+--     --   print('root:', x)
+--     --   return x
+--     -- end)
+-- })
 vim.lsp.config('lua_ls', {
+    cmd = { 'lua-language-server' },
     on_init = function(client)
-        local path = client.workspace_folders[1].name
+        -- local path = client.workspace_folders[1].name
         -- print("path is "..path..'/.luarc.json')
         -- if vim.loop.fs_stat(path..'/.luarc.json') or vim.loop.fs_stat(path..'/.luarc.jsonc') then
         --     print('fs stat?')
@@ -90,15 +91,15 @@ vim.lsp.config('lua_ls', {
             -- Make the server aware of Neovim runtime files
             workspace = {
                 checkThirdParty = false,
-                -- library = {
-                --     vim.env.VIMRUNTIME
-                --     -- Depending on the usage, you might want to add additional paths here.
-                --     -- "${3rd}/luv/library"
-                --     -- "${3rd}/busted/library",
-                -- },
+                library = {
+                    vim.env.VIMRUNTIME
+                    -- Depending on the usage, you might want to add additional paths here.
+                    -- "${3rd}/luv/library"
+                    -- "${3rd}/busted/library",
+                },
                 -- or pull in all of 'runtimepath'. NOTE: this is a lot slower
                 -- library = vim.api.nvim_get_runtime_file("", true)
-                library = { "C:\\workplace\\vscode-wow-api\\Annotations" }
+                -- library = { "C:\\workplace\\vscode-wow-api\\Annotations" }
             }
         })
     end,
@@ -107,6 +108,13 @@ vim.lsp.config('lua_ls', {
     },
     on_attach = Global_set_bindings
 })
+-- zuban lsp
+vim.lsp.config('zuban', {
+    cmd = { 'zuban', 'server' },
+    on_attach = Global_set_bindings,
+    filetypes = { 'py' },
+})
+vim.lsp.enable('zuban')
 -- local util = require('lspconfig').util
 -- lsp.pylyzer.setup {
 -- root_dir = function(fname)
